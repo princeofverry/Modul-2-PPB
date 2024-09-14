@@ -22,10 +22,15 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
     private List<DataItem> dataUser;
     private Context mContext;
 
-
     public RecycleAdapter(List<DataItem> dataUser, Context mContext) {
         this.dataUser = dataUser;
         this.mContext = mContext;
+    }
+
+    // Method untuk memperbarui data dalam adapter
+    public void filterList(List<DataItem> filteredList) {
+        this.dataUser = filteredList;
+        notifyDataSetChanged(); // Memberitahu adapter bahwa data telah berubah
     }
 
     @NonNull
@@ -46,7 +51,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(mContext, DetailActivity.class);
                 intent.putExtra("name", dataUser.get(i).getFirstName());
                 mContext.startActivity(intent);
